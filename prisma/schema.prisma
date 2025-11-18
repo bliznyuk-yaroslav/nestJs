@@ -8,8 +8,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 model User {
-  id Int @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name String 
   email String @unique
-  age Int?
+  password String
+  role Role @default(USER)
+  createdAt DataTime @default(now())
+  updatedAt DataTime @updatedAt
+  events Event[] @relation("OrganizerEvents")
+  tickets Ticket[]
+}
+
+enum Role {
+  USER
+  ORGANIZER
+  ADMIN
 }

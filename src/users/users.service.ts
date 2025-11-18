@@ -28,7 +28,7 @@ export class UsersService {
   async createUser(data: {
     email: string;
     password: string;
-    name?: string;
+    name: string;
     role?: 'USER' | 'ADMIN' | 'ORGANIZER';
   }) {
     const exists = await this.prisma.user.findUnique({ where: { email: data.email } });
@@ -38,7 +38,7 @@ export class UsersService {
       data: {
         email: data.email,
         passwordHash,
-        name: data.name ?? null,
+        name: data.name,
         role: (data.role ?? 'USER') as any,
       },
       select: {
@@ -69,8 +69,8 @@ export class UsersService {
     const user = await this.prisma.user.update({
       where: { id },
       data: {
-        email: data.email ?? undefined,
-        name: (data.name ?? undefined) ? undefined : data.name,
+        email: data.email,
+        name: data.name,
         role: (data.role as any) ?? undefined,
         passwordHash,
       },

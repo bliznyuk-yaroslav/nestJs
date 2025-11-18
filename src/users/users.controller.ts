@@ -28,7 +28,7 @@ export class UserControllers {
     body: {
       email: string;
       password: string;
-      name?: string;
+      name: string;
       role?: 'USER' | 'ADMIN' | 'ORGANIZER';
     },
   ) {

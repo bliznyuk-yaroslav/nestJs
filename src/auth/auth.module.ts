@@ -9,7 +9,7 @@ import { RolesGuard } from './roles.guard';
   imports: [
     PrismaModule,
     JwtModule.register({
-      secret: process.env.JWT_secret || process.env.JWT_secret || 'dev-secret',
+      secret: process.env.JWT_SECRET || process.env.JWT_SECRET || 'dev-secret',
       signOptions: { expiresIn: '7d' },
     }),
   ],

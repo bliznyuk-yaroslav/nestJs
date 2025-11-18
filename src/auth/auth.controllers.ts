@@ -6,8 +6,8 @@ import { AuthGuard } from './auth.guard';
 export class AuthController {
   constructor(private auth: AuthService) {}
   @Post('register')
-  register(@Body() body: { email: string; password: string }) {
-    return this.auth.register(body.email, body.password);
+  register(@Body() body: { email: string; password: string, name:string }) {
+    return this.auth.register(body.email,body.name, body.password);
   }
   @Post('login')
   login(@Body() body: { email: string; password: string }) {

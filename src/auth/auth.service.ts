@@ -8,21 +8,22 @@ export class AuthService {
     private prisma: PrismaService,
     private jwt: JwtService,
   ) {}
-  async register(email: string, password: string) {
-    const existing = await this.prisma.user.findMany({ where: { email } });
+  async register(email: string, password: string, name:string) {
+    const existing = await this.prisma.user.findUnique({ where: { email } });
     if (existing) throw new ConflictException('Email already exists');
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await this.prisma.user.create({
       data: {
         email,
         passwordHash,
+        name
       },
     });
     const access_token = await this.signToken(user.id, user.email, user.role as any);
     return { access_token };
   }
   async login(email: string, password: string) {
-    const user = await this.prisma.user.findMany({ where: { email } });
+    const user = await this.prisma.user.findUnique({ where: { email } });
     if (!user) throw new UnauthorizedException('Invalid credentials');
     const ok = await bcrypt.compare(password, user.passwordHash);
     if (!ok) throw new UnauthorizedException('Invalid credentials');

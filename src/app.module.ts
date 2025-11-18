@@ -13,13 +13,7 @@ import { AnalyticsModule } from './analytics/analytics.module';
 @Module({
   imports: [
     PrismaModule,
-    AuthModule,
-    NotificationsModule,
-    UploadsModule,
-    EventsModule,
-    UsersModule,
-    TicketsModule,
-    AnalyticsModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

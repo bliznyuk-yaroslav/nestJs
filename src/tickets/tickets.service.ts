@@ -24,6 +24,7 @@ export class TicketsService {
             if(!exist){throw new NotFoundException('Event not found');}
             throw new BadRequestException('Not enough tickets available');
         }
+        const test= "test"
         return tx.ticket.create({
             data:{userId, eventId, quantity}
       });

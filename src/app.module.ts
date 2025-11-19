@@ -3,19 +3,19 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from 'prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
-import { NotificationsModule } from './notifications/notifications.module';
-import { UploadsModule } from './uploads/uploads.module';
-import { EventsModule } from './events/events.module';
-import { UsersModule } from './users/users.module';
-import { TicketsModule } from './tickets/tickets.module';
 import { AnalyticsModule } from './analytics/analytics.module';
+import { AnalyticsService } from './analytics/analytics.service';
+import { AnalyticsController } from './analytics/analytics.controller';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
     PrismaModule,
-    AuthModule
+    AuthModule,
+    EventsModule,
+    AnalyticsModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, AnalyticsController],
+  providers: [AppService, AnalyticsService],
 })
 export class AppModule {}
